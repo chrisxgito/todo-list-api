@@ -1,4 +1,3 @@
-
 openapi: 3.0.1
 info:
 	title: Todo List Management
@@ -31,11 +30,15 @@ paths:
 					content:
 						application/json:
 							schema:
-								type: array
-								items:
-									$ref: '#/components/schemas/TodoList'
+								$ref: '#/components/schemas/TodoList'
 				404:
 					description: Invalid list id
+				500:
+					description: Server problems
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 		delete:
 			summary: Delete List
 			operationId: deleteList
@@ -51,6 +54,12 @@ paths:
 					description: List Entry deleted
 				404:
 					description: Invalid list id
+				500:
+					description: Server problems
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 	/todo-list:
 		post:
 			tags:
@@ -58,7 +67,7 @@ paths:
 			summary: Add new list
 			operationId: addList
 			requestBody:
-				description: List object
+				description: List object to be added
 				content:
 					application/json:
 						schema:
@@ -71,8 +80,18 @@ paths:
 						application/json:
 							schema:
 								$ref: '#/components/schemas/TodoList'
+				406:
+					description: JSON not valid
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 				500:
-					description: List could not be added
+					description: Server Problems
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 	/todo-list/{list_id}/entry:
 		post:
 			tags:
@@ -80,7 +99,7 @@ paths:
 			summary: Add new list entry
 			operationId: addListEntry
 			requestBody:
-				description: List entry object
+				description: List entry object to be added
 				content:
 					application/json:
 						schema:
@@ -91,6 +110,10 @@ paths:
 					description: List Entry added
 				500:
 					description: List entry could not be added
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 	/todo-list/{list_id}/entry/{entry_id}:
 		patch:
 			tags:
@@ -107,8 +130,18 @@ paths:
 			responses:
 				200:
 					description: List Entry updated
+				406:
+					description: JSON not valid
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 				500:
 					description: List entry could not be updated
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 		delete:
 			summary: Delete List Entry
 			operationId: deleteListEntry
@@ -130,6 +163,12 @@ paths:
 					description: List entry deleted
 				404:
 					description: Invalid list id or entry id
+				500:
+					description: Server problems
+					content:
+						application/json:
+							schema:
+								$ref: '#/components/schemas/GeneralError'
 components:
 	schemas:
 		TodoList:
@@ -140,12 +179,6 @@ components:
 					format: uuid
 				name:
 					type: string
-		TodoListId:
-			type: object
-			properties:
-				id:
-					type: string
-					format: uuid
 		TodoEntry:
 			type: object
 			properties:
@@ -156,9 +189,6 @@ components:
 					type: string
 				description:
 					type: string
-				user_id:
-					type: string
-					format: uuid
 				list_id:
 					type: string
 					format: uuid
@@ -170,13 +200,3 @@ components:
 					format: int32
 				message:
 					type: string
-		TodoEntryAndListId:
-			type: object
-			properties:
-				listId:
-					type: string
-					format: uuid
-				entryId:
-					type: string
-					format: uuid
-   
