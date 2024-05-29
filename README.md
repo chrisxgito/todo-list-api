@@ -16,10 +16,14 @@ darin hinzufügen:
 ```
 interface eth0
 static ip_address=192.168.24.189/24
-static routers=192.168.1.1
+static routers=192.168.24.254
 static domain_name_servers=8.8.8.8 8.8.4.4
 ```
 Funktionalität mit statischen Standardgateway- und DNS-Einstellungen konnte nicht mehr getestet werden
+
+Ermitteln durch folgende Befehle:
+- DNS Server: `sudo nano /etc/resolv.conf`
+- Gateway: `ip r`
 
 `sudo reboot`
 
