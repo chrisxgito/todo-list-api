@@ -2,8 +2,6 @@ openapi: 3.0.1
 info:
 	title: Todo List Management
 	description: API for managing todo lists and their entries.
-	contact:
-		email: c.finkhaeuser@basecom.de
 	license:
 		name: Apache 2.0
 		url: http://www.apache.org/licenses/LICENSE-2.0.html
