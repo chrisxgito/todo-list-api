@@ -44,3 +44,5 @@ Ermitteln durch folgende Befehle:
 `sudo docker build https://github.com/chrisxgito/todo-list-api.git#main  -t todoserver`
 
 `sudo docker run -p 5000:5000 -d todoserver`
+
+Server ist via 192.168.24.189:5000 erreichbar
