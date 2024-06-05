@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
 	title: Todo List Management
-	description: API for managing todo lists and their entries.
+	description: API for managing todo lists and their entries
 	license:
 		name: Apache 2.0
 		url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -91,6 +91,13 @@ paths:
 							schema:
 								$ref: '#/components/schemas/GeneralError'
 	/todo-list/{list_id}/entry:
+		parameters:  # Define path parameters at the path level
+			- name: list_id
+			  in: path
+			  required: true
+			  description: The ID of the list to which the entries belong
+			  schema:
+				  type: string
 		post:
 			tags:
 				- List Management
@@ -113,6 +120,19 @@ paths:
 							schema:
 								$ref: '#/components/schemas/GeneralError'
 	/todo-list/{list_id}/entry/{entry_id}:
+		parameters:  # Define path parameters at the path level for consistency
+			- name: list_id
+			  in: path
+			  required: true
+			  description: The ID of the list that contains the entry
+			  schema:
+				  type: string
+			- name: entry_id
+			  in: path
+			  required: true
+			  description: The ID of the entry to operate on
+			  schema:
+				  type: string
 		patch:
 			tags:
 				- List Management
@@ -143,19 +163,6 @@ paths:
 		delete:
 			summary: Delete List Entry
 			operationId: deleteListEntry
-			parameters:
-				- name: list_id
-				  in: path
-				  description: The ID of the list that contains the entry
-				  required: true
-				  schema:
-					  type: string
-				- name: entry_id
-				  in: path
-				  description: The ID of the entry to delete
-				  required: true
-				  schema:
-					  type: string
 			responses:
 				200:
 					description: List entry deleted
