@@ -1,0 +1,6 @@
+services:
+  todo-service:
+    build: https://github.com/chrisxgito/todo-list-api.git#main
+    restart: always
+    ports:
+      - "5000:5000"

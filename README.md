@@ -40,9 +40,12 @@ Ermitteln durch folgende Befehle:
 - alle andere groups `-a`
 - und sudo group hinzfügen `-G`
 
-## Docker
+## Dockerfile
 `sudo docker build https://github.com/chrisxgito/todo-list-api.git#main  -t todoserver`
 
 `sudo docker run -p 5000:5000 -d todoserver`
+
+## Docker Compose
+`docker-compose up -d`
 
 Server ist via 192.168.24.189:5000 erreichbar
